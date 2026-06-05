@@ -6,9 +6,9 @@
     "colors": ["#8a8a82", "#c8c4b0"],
     "dimensions": "One size",
     "medium": "Altered cotton",
-    "imagePath": "/images/01_gray_top_hero.jpg",
-    "image": "/images/01_gray_top_hero.jpg",
-    "images": ["/images/01_gray_top_hero.jpg"]
+    "imagePath": "/assets/01_gray_top_hero.jpg",
+    "image": "/assets/01_gray_top_hero.jpg",
+    "images": ["/assets/01_gray_top_hero.jpg"]
   },
   {
     "id": "02",
@@ -17,9 +17,9 @@
     "colors": ["#7a9aaa", "#c8dde0"],
     "dimensions": "One size",
     "medium": "Altered linen",
-    "imagePath": "/images/02_blue_shirt_hero.jpg",
-    "image": "/images/02_blue_shirt_hero.jpg",
-    "images": ["/images/02_blue_shirt_hero.jpg"]
+    "imagePath": "/assets/02_blue_shirt_hero.jpg",
+    "image": "/assets/02_blue_shirt_hero.jpg",
+    "images": ["/assets/02_blue_shirt_hero.jpg"]
   },
   {
     "id": "03",
@@ -28,9 +28,9 @@
     "colors": ["#4a5e7a", "#2c3d5a"],
     "dimensions": "One size",
     "medium": "Altered denim",
-    "imagePath": "/images/03_denim_jacket.jpg",
-    "image": "/images/03_denim_jacket.jpg",
-    "images": ["/images/03_denim_jacket.jpg", "/images/04_denim_detail.jpg"]
+    "imagePath": "/assets/03_denim_jacket.jpg",
+    "image": "/assets/03_denim_jacket.jpg",
+    "images": ["/assets/03_denim_jacket.jpg", "/assets/04_denim_detail.jpg"]
   },
   {
     "id": "04",
@@ -39,9 +39,9 @@
     "colors": ["#1a2a4a", "#2a3a60"],
     "dimensions": "One size",
     "medium": "Altered cotton twill",
-    "imagePath": "/images/05_navy_jacket.jpg",
-    "image": "/images/05_navy_jacket.jpg",
-    "images": ["/images/05_navy_jacket.jpg", "/images/06_khaki_shorts.jpg"]
+    "imagePath": "/assets/05_navy_jacket.jpg",
+    "image": "/assets/05_navy_jacket.jpg",
+    "images": ["/assets/05_navy_jacket.jpg", "/assets/06_khaki_shorts.jpg"]
   },
   {
     "id": "05",
@@ -50,9 +50,9 @@
     "colors": ["#b0a882", "#d4c89a"],
     "dimensions": "One size",
     "medium": "Altered cotton",
-    "imagePath": "/images/07_khaki_texture.jpg",
-    "image": "/images/07_khaki_texture.jpg",
-    "images": ["/images/07_khaki_texture.jpg", "/images/08_blush_top_hero.jpg"]
+    "imagePath": "/assets/07_khaki_texture.jpg",
+    "image": "/assets/07_khaki_texture.jpg",
+    "images": ["/assets/07_khaki_texture.jpg", "/assets/08_blush_top_hero.jpg"]
   },
   {
     "id": "06",
@@ -61,9 +61,9 @@
     "colors": ["#e8a898", "#e8c8bc"],
     "dimensions": "One size",
     "medium": "Altered cotton",
-    "imagePath": "/images/09_batik_top_hero.jpg",
-    "image": "/images/09_batik_top_hero.jpg",
-    "images": ["/images/09_batik_top_hero.jpg"]
+    "imagePath": "/assets/09_batik_top_hero.jpg",
+    "image": "/assets/09_batik_top_hero.jpg",
+    "images": ["/assets/09_batik_top_hero.jpg"]
   },
   {
     "id": "07",
@@ -72,9 +72,9 @@
     "colors": ["#2a6a5a", "#c47a3a"],
     "dimensions": "One size",
     "medium": "Hand-altered batik cotton",
-    "imagePath": "/images/10_batik_garden_hero.jpg",
-    "image": "/images/10_batik_garden_hero.jpg",
-    "images": ["/images/10_batik_garden_hero.jpg"]
+    "imagePath": "/assets/10_batik_garden_hero.jpg",
+    "image": "/assets/10_batik_garden_hero.jpg",
+    "images": ["/assets/10_batik_garden_hero.jpg"]
   },
   {
     "id": "08",
@@ -83,8 +83,8 @@
     "colors": ["#4a6a8a", "#8a5a3a"],
     "dimensions": "One size",
     "medium": "Hand-altered batik cotton",
-    "imagePath": "/images/11_batik_pants.jpg",
-    "image": "/images/11_batik_pants.jpg",
-    "images": ["/images/11_batik_pants.jpg", "/images/12_batik_set.jpg"]
+    "imagePath": "/assets/11_batik_pants.jpg",
+    "image": "/assets/11_batik_pants.jpg",
+    "images": ["/assets/11_batik_pants.jpg", "/assets/12_batik_set.jpg"]
   }
 ]

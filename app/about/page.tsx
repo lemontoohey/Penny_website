@@ -62,7 +62,7 @@ export default function AboutPage() {
       <div className="relative w-full max-w-md aspect-[3/4] mb-48" style={{ boxShadow: '0 40px 80px -20px rgba(10,5,25,1)' }}>
         <div className="relative w-full h-full overflow-hidden grayscale contrast-[1.1] bg-void">
           <Image
-            src="/images/00_studio_sewing_hero.jpg"
+            src="/assets/00_studio_sewing_hero.jpg"
             alt="Penny Evans in her studio"
             fill
             className="portrait-img object-cover"

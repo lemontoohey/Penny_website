@@ -11,8 +11,8 @@ const config: Config = {
     extend: {
       colors: {
         // Luxury Digital Gallery Tokens
-        void:       '#3D0916',
-        'diox-rich':'#3D0916',
+        void:       '#6B1428',
+        'diox-rich':'#6B1428',
         // Zinnia flower palette
         'zinnia-deep':  '#7A1835',
         'zinnia-mid':   '#D4487A',

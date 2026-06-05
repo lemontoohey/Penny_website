@@ -203,33 +203,32 @@ export function ArtworkDetail({ artwork, onClose, isActive = true }: { artwork: 
                 />
               </motion.div>
 
-              {/* ── Zinnia flower reveal overlays ───────────────────────────
-                  4 layers peeling back from flower dark-centre outward       */}
+              {/* ── Zinnia flower reveal overlays — full opacity, blend-mode normal ── */}
               <motion.div
                 key={`zd-${activeIndex}`}
                 className="absolute inset-0 bg-[#4A0F20] z-[3] pointer-events-none will-change-opacity"
-                initial={{ opacity: 0.82 }}
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 2.2, delay: 0.2, ease: [0.22, 0.61, 0.36, 1] }}
               />
               <motion.div
                 key={`zd2-${activeIndex}`}
-                className="absolute inset-0 bg-[#7A1835] mix-blend-color z-[3] pointer-events-none will-change-opacity"
-                initial={{ opacity: 0.82 }}
+                className="absolute inset-0 bg-[#7A1835] z-[3] pointer-events-none will-change-opacity"
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 2.2, delay: 0.2, ease: [0.22, 0.61, 0.36, 1] }}
               />
               <motion.div
                 key={`zm-${activeIndex}`}
-                className="absolute inset-0 bg-[#D4487A] mix-blend-color z-[3] pointer-events-none will-change-opacity"
-                initial={{ opacity: 0.5 }}
+                className="absolute inset-0 bg-[#D4487A] z-[3] pointer-events-none will-change-opacity"
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 2.5, delay: 0.15, ease: [0.22, 0.61, 0.36, 1] }}
               />
               <motion.div
                 key={`zb-${activeIndex}`}
-                className="absolute inset-0 bg-[#F07898] mix-blend-color z-[3] pointer-events-none will-change-opacity"
-                initial={{ opacity: 0.3 }}
+                className="absolute inset-0 bg-[#F07898] z-[3] pointer-events-none will-change-opacity"
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 0 }}
                 transition={{ duration: 2.8, delay: 0.1, ease: [0.22, 0.61, 0.36, 1] }}
               />
