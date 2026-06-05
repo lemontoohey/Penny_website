@@ -4,10 +4,19 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const ZINNIA_EXIT = [
+  '#9E3060',
+  '#7D1545',
+  '#829942',
+  '#C28E70',
+  '#C4607A',
+];
+
 export function GatekeeperPage() {
   const router = useRouter();
   const [exiting, setExiting] = useState(false);
   const [contentVisible, setContentVisible] = useState(true);
+  const [scrollExit, setScrollExit] = useState(false);
 
   // Lock body/html scroll while gatekeeper is active
   useEffect(() => {
@@ -21,8 +30,39 @@ export function GatekeeperPage() {
     };
   }, []);
 
+  // Scroll-down intent → zinnia wipe exit
+  // Body overflow is locked so scrollY stays 0 — use wheel + touch instead
+  useEffect(() => {
+    if (scrollExit || exiting) return;
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY > 0) triggerScrollExit();
+    };
+    let touchStartY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches[0].clientY < touchStartY - 20) triggerScrollExit();
+    };
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [scrollExit, exiting]);
+
+  const triggerScrollExit = () => {
+    if (scrollExit || exiting) return;
+    sessionStorage.setItem('penny-entered', '1');
+    setScrollExit(true);
+    setTimeout(() => router.push('/collection'), 600);
+  };
+
   const enter = () => {
-    if (exiting) return;
+    if (exiting || scrollExit) return;
     sessionStorage.setItem('penny-entered', '1');
     setContentVisible(false);
     setExiting(true);
@@ -30,7 +70,7 @@ export function GatekeeperPage() {
   };
 
   const skip = () => {
-    if (exiting) return;
+    if (exiting || scrollExit) return;
     sessionStorage.setItem('penny-entered', '1');
     setExiting(true);
     setTimeout(() => router.push('/collection'), 1100);
@@ -40,16 +80,11 @@ export function GatekeeperPage() {
     <AnimatePresence mode="wait">
       <motion.div
         key="gatekeeper"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          overflow: 'hidden',
-          zIndex: 10,
-        }}
+        style={{ position: 'fixed', inset: 0, overflow: 'hidden', zIndex: 10 }}
         animate={{ opacity: exiting ? 0 : 1 }}
         transition={{ duration: exiting ? 1.2 : 0, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* CONTENT LAYER — transparent so CanvasBackground zinnia shader shows through */}
+        {/* CONTENT LAYER */}
         <AnimatePresence>
           {contentVisible && (
             <motion.div
@@ -130,14 +165,8 @@ export function GatekeeperPage() {
                 }}
                 variants={{
                   hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 0.28,
-                    transition: { duration: 1, delay: 3.4, ease: 'easeOut' },
-                  },
-                  hovered: {
-                    opacity: 0.6,
-                    transition: { duration: 0.4, ease: 'easeOut' },
-                  },
+                  visible: { opacity: 0.28, transition: { duration: 1, delay: 3.4, ease: 'easeOut' } },
+                  hovered: { opacity: 0.6, transition: { duration: 0.4, ease: 'easeOut' } },
                 }}
                 initial="hidden"
                 animate="visible"
@@ -170,6 +199,22 @@ export function GatekeeperPage() {
         >
           SKIP
         </motion.span>
+
+        {/* ZINNIA SCROLL-EXIT WIPE — sweeps up from bottom to cover screen */}
+        {ZINNIA_EXIT.map((colour, i) => (
+          <motion.div
+            key={i}
+            className="fixed inset-0 z-50"
+            style={{ backgroundColor: colour, opacity: 0.90 }}
+            initial={{ scaleY: 0, transformOrigin: 'bottom' }}
+            animate={scrollExit ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{
+              duration: 0.18,
+              delay: i * 0.04,
+              ease: [0.76, 0, 0.24, 1],
+            }}
+          />
+        ))}
       </motion.div>
     </AnimatePresence>
   );

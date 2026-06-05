@@ -71,11 +71,11 @@ const ArchivalCanvasMaterial = shaderMaterial(
       float toothPattern = smoothstep(0.45, 0.55, grainBase);
       vec3 finalColor = mix(uColorBase, uColorPaper, toothPattern * 0.25);
 
-      // 2. BREATHING AMBIENT GLOW — atmospheric depth, no shapes
-      float pulse      = 0.5 + 0.5 * sin(uTime * 0.4);
+      // 2. BREATHING AMBIENT GLOW — subtle atmospheric depth, no shapes
+      float pulse      = 0.5 + 0.25 * sin(uTime * 0.4);
       float centerDist = length(vUv - 0.5) * 2.0;
-      float ambientGlow = smoothstep(0.6, 0.0, centerDist);
-      finalColor = mix(finalColor, uColorMagenta, ambientGlow * 0.55 * pulse * 0.5);
+      float ambientGlow = smoothstep(0.35, 0.0, centerDist);
+      finalColor = mix(finalColor, uColorMagenta, ambientGlow * 0.20 * pulse * 0.25);
 
       // 3. CHROMATIC BAND + VELOCITY HALATION
       float posB = fract(0.5 + scrollOffset * 0.4);
@@ -117,7 +117,7 @@ const ArchivalCanvasMaterial = shaderMaterial(
       // 6. VIGNETTE — lighter centre, gentle edge darkening
       float vigDist = length((vUv - 0.5) * vec2(0.9, 1.1)) * 2.0;
       float vignette = 1.0 - smoothstep(0.3, 1.4, vigDist);
-      finalColor *= (0.72 + 0.28 * vignette);
+      finalColor *= (0.60 + 0.40 * vignette);
 
       finalColor = min(finalColor, vec3(1.0));
       gl_FragColor = vec4(finalColor, 1.0);
