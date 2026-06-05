@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-void: #3D0916;
+  --color-diox-rich: #3D0916;
+  --color-parchment: #FDF5E6;        /* UNCHANGED */
+  --color-vermillion: #D4487A;       /* was #E34234 — now zinnia-mid */
+  --color-magenta: #F07898;          /* was #E40078 — now zinnia-bloom */
+  --color-benzi: #7A1835;            /* was #962814 — now zinnia-deep */
+  --color-zinnia-deep: #7A1835;
+  --color-zinnia-mid: #D4487A;
+  --color-zinnia-bloom: #F07898;
+  --color-zinnia-tip: #FFADC6;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), serif;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-parchment);
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  touch-action: pan-y; /* Preserve native iOS/Android scroll momentum */
+}
+html {
+  overscroll-behavior: none;
+  background-color: var(--color-void);
+}
+
+/* Page transition overlay: zinnia void on mobile, zinnia-deep on desktop */
+.page-transition-overlay {
+  background-color: rgba(61, 9, 22, 1);   /* #3D0916 — void wine-red */
+}
+@media (min-width: 769px) {
+  .page-transition-overlay {
+    background-color: rgba(122, 24, 53, 1); /* #7A1835 — zinnia-deep */
+  }
+}
+
+/* Microscopic noise to dither shadow banding */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Base style for the light-crack reveal */
+.image-crack-wrapper {
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+  transition: clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}

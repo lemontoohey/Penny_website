@@ -1,0 +1,90 @@
+[
+  {
+    "id": "01",
+    "title": "Gray Top",
+    "price": "Enquire",
+    "colors": ["#8a8a82", "#c8c4b0"],
+    "dimensions": "One size",
+    "medium": "Altered cotton",
+    "imagePath": "/images/01_gray_top_hero.jpg",
+    "image": "/images/01_gray_top_hero.jpg",
+    "images": ["/images/01_gray_top_hero.jpg"]
+  },
+  {
+    "id": "02",
+    "title": "Blue Shirt",
+    "price": "Enquire",
+    "colors": ["#7a9aaa", "#c8dde0"],
+    "dimensions": "One size",
+    "medium": "Altered linen",
+    "imagePath": "/images/02_blue_shirt_hero.jpg",
+    "image": "/images/02_blue_shirt_hero.jpg",
+    "images": ["/images/02_blue_shirt_hero.jpg"]
+  },
+  {
+    "id": "03",
+    "title": "Denim Jacket",
+    "price": "Enquire",
+    "colors": ["#4a5e7a", "#2c3d5a"],
+    "dimensions": "One size",
+    "medium": "Altered denim",
+    "imagePath": "/images/03_denim_jacket.jpg",
+    "image": "/images/03_denim_jacket.jpg",
+    "images": ["/images/03_denim_jacket.jpg", "/images/04_denim_detail.jpg"]
+  },
+  {
+    "id": "04",
+    "title": "Navy Jacket",
+    "price": "Enquire",
+    "colors": ["#1a2a4a", "#2a3a60"],
+    "dimensions": "One size",
+    "medium": "Altered cotton twill",
+    "imagePath": "/images/05_navy_jacket.jpg",
+    "image": "/images/05_navy_jacket.jpg",
+    "images": ["/images/05_navy_jacket.jpg", "/images/06_khaki_shorts.jpg"]
+  },
+  {
+    "id": "05",
+    "title": "Khaki Shorts",
+    "price": "Enquire",
+    "colors": ["#b0a882", "#d4c89a"],
+    "dimensions": "One size",
+    "medium": "Altered cotton",
+    "imagePath": "/images/07_khaki_texture.jpg",
+    "image": "/images/07_khaki_texture.jpg",
+    "images": ["/images/07_khaki_texture.jpg", "/images/08_blush_top_hero.jpg"]
+  },
+  {
+    "id": "06",
+    "title": "Blush Top",
+    "price": "Enquire",
+    "colors": ["#e8a898", "#e8c8bc"],
+    "dimensions": "One size",
+    "medium": "Altered cotton",
+    "imagePath": "/images/09_batik_top_hero.jpg",
+    "image": "/images/09_batik_top_hero.jpg",
+    "images": ["/images/09_batik_top_hero.jpg"]
+  },
+  {
+    "id": "07",
+    "title": "Batik Top",
+    "price": "Enquire",
+    "colors": ["#2a6a5a", "#c47a3a"],
+    "dimensions": "One size",
+    "medium": "Hand-altered batik cotton",
+    "imagePath": "/images/10_batik_garden_hero.jpg",
+    "image": "/images/10_batik_garden_hero.jpg",
+    "images": ["/images/10_batik_garden_hero.jpg"]
+  },
+  {
+    "id": "08",
+    "title": "Batik Pants",
+    "price": "Enquire",
+    "colors": ["#4a6a8a", "#8a5a3a"],
+    "dimensions": "One size",
+    "medium": "Hand-altered batik cotton",
+    "imagePath": "/images/11_batik_pants.jpg",
+    "image": "/images/11_batik_pants.jpg",
+    "images": ["/images/11_batik_pants.jpg", "/images/12_batik_set.jpg"]
+  }
+]
