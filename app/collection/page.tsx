@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArtworkDetail } from '@/app/art/[id]/ArtworkDetail';
@@ -22,6 +22,83 @@ const artworks = artworksData as Artwork[];
 const imgSrc = (path: string) =>
   process.env.NODE_ENV === 'production' ? `/Penny_website${path}` : path;
 
+const ZINNIA_LAYERS = [
+  '#9E3060',  // deep outer rose
+  '#7D1545',  // magenta core
+  '#8BAD30',  // chartreuse lime
+  '#D4885C',  // warm apricot
+  '#C4607A',  // salmon rose
+];
+
+function ArtworkCard({
+  artwork,
+  onSelect,
+}: {
+  artwork: Artwork;
+  onSelect: (a: Artwork) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !revealed) {
+          setRevealed(true);
+        }
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [revealed]);
+
+  return (
+    <div
+      ref={ref}
+      className="cursor-pointer w-[82vw] md:w-[42vw]"
+      onClick={() => onSelect(artwork)}
+    >
+      {/* Image frame — overflow:hidden clips the wipe layers cleanly */}
+      <motion.div
+        layoutId={`artwork-container-${artwork.id}`}
+        className="relative w-full h-[60vh] md:h-[72vh] overflow-hidden"
+      >
+        <motion.img
+          layoutId={`artwork-image-${artwork.id}`}
+          src={imgSrc(artwork.image)}
+          alt={artwork.title}
+          className="w-full h-full object-cover"
+        />
+
+        {ZINNIA_LAYERS.map((colour, i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0 z-10"
+            style={{ backgroundColor: colour, opacity: 0.82, transformOrigin: 'top' }}
+            initial={{ scaleY: 1 }}
+            animate={revealed ? { scaleY: 0 } : { scaleY: 1 }}
+            transition={{
+              duration: 0.45,
+              delay: i * 0.06,
+              ease: [0.76, 0, 0.24, 1],
+            }}
+          />
+        ))}
+      </motion.div>
+
+      <p className="mt-4 font-serif text-[11px] tracking-[0.25em] uppercase text-[#FDF5E6]/70">
+        {artwork.title}
+      </p>
+      <p className="font-serif text-[11px] tracking-[0.25em] uppercase text-[#FDF5E6]/40">
+        {artwork.price}
+      </p>
+    </div>
+  );
+}
+
 export default function CollectionPage() {
   const [selected, setSelected] = useState<Artwork | null>(null);
 
@@ -38,26 +115,11 @@ export default function CollectionPage() {
 
       <div className="w-full pt-32 pb-32 flex flex-col items-center gap-24">
         {artworks.map((artwork) => (
-          <div
+          <ArtworkCard
             key={artwork.id}
-            className="cursor-pointer w-[82vw] md:w-[42vw]"
-            onClick={() => setSelected(artwork)}
-          >
-            <motion.div layoutId={`artwork-container-${artwork.id}`}>
-              <motion.img
-                layoutId={`artwork-image-${artwork.id}`}
-                src={imgSrc(artwork.image)}
-                alt={artwork.title}
-                className="w-full h-[60vh] md:h-[72vh] object-cover"
-              />
-            </motion.div>
-            <p className="mt-4 font-serif text-[11px] tracking-[0.25em] uppercase text-[#FDF5E6]/70">
-              {artwork.title}
-            </p>
-            <p className="font-serif text-[11px] tracking-[0.25em] uppercase text-[#FDF5E6]/40">
-              {artwork.price}
-            </p>
-          </div>
+            artwork={artwork}
+            onSelect={setSelected}
+          />
         ))}
       </div>
 
