@@ -26,7 +26,7 @@ const total = artworks.length;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 const src = (p: string) =>
-  process.env.NODE_ENV === 'production' ? `/camille_website${p}` : p;
+  process.env.NODE_ENV === 'production' ? `/Penny_website${p}` : p;
 
 export function HorizontalGallery({ onSelect }: HorizontalGalleryProps) {
   const trackRef = useRef<HTMLDivElement>(null);

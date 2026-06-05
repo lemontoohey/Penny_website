@@ -67,7 +67,7 @@ export function ArtworkDetail({ artwork, onClose, isActive = true }: { artwork: 
   // ── Image list with production basePath prefix ───────────────────────────
   const rawImages = artwork.images && artwork.images.length > 1 ? artwork.images : [artwork.image];
   const allImages = rawImages.map((p) =>
-    process.env.NODE_ENV === 'production' && !p.startsWith('http') ? `/camille_website${p}` : p
+    process.env.NODE_ENV === 'production' && !p.startsWith('http') ? `/Penny_website${p}` : p
   );
   const [activeIndex, setActiveIndex] = useState(0);
 

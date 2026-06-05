@@ -58,10 +58,10 @@ const GalleryCell = memo(function GalleryCell({
 
   const imageSrc = artwork.imagePath
     ? process.env.NODE_ENV === 'production' && !artwork.imagePath.startsWith('http')
-      ? `/camille_website${artwork.imagePath}`
+      ? `/Penny_website${artwork.imagePath}`
       : artwork.imagePath
     : process.env.NODE_ENV === 'production'
-      ? '/camille_website/placeholders/artwork-1.jpg'
+      ? '/Penny_website/placeholders/artwork-1.jpg'
       : '/placeholders/artwork-1.jpg';
 
   const handleMouseEnter = useCallback(() => {
