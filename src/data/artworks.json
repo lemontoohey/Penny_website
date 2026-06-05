@@ -1,90 +1,57 @@
 [
   {
     "id": "01",
-    "title": "Gray Top",
+    "title": "Painting I",
     "price": "Enquire",
-    "colors": ["#8a8a82", "#c8c4b0"],
-    "dimensions": "One size",
-    "medium": "Altered cotton",
-    "imagePath": "/assets/01_gray_top_hero.jpg",
-    "image": "/assets/01_gray_top_hero.jpg",
-    "images": ["/assets/01_gray_top_hero.jpg"]
+    "colors": ["#8a5a4a", "#c8a090"],
+    "dimensions": "To be confirmed",
+    "medium": "Oil on canvas",
+    "imagePath": "/assets/5604BE09-07F8-499C-856E-04F5BA364DF7.jpeg",
+    "image": "/assets/5604BE09-07F8-499C-856E-04F5BA364DF7.jpeg",
+    "images": ["/assets/5604BE09-07F8-499C-856E-04F5BA364DF7.jpeg"]
   },
   {
     "id": "02",
-    "title": "Blue Shirt",
+    "title": "Painting II",
     "price": "Enquire",
-    "colors": ["#7a9aaa", "#c8dde0"],
-    "dimensions": "One size",
-    "medium": "Altered linen",
-    "imagePath": "/assets/02_blue_shirt_hero.jpg",
-    "image": "/assets/02_blue_shirt_hero.jpg",
-    "images": ["/assets/02_blue_shirt_hero.jpg"]
+    "colors": ["#6a7a8a", "#a0b0c0"],
+    "dimensions": "To be confirmed",
+    "medium": "Oil on canvas",
+    "imagePath": "/assets/FBE2C611-AADF-4F44-8CFF-FB7C0A9E916F.jpeg",
+    "image": "/assets/FBE2C611-AADF-4F44-8CFF-FB7C0A9E916F.jpeg",
+    "images": ["/assets/FBE2C611-AADF-4F44-8CFF-FB7C0A9E916F.jpeg"]
   },
   {
     "id": "03",
-    "title": "Denim Jacket",
+    "title": "Painting III",
     "price": "Enquire",
-    "colors": ["#4a5e7a", "#2c3d5a"],
-    "dimensions": "One size",
-    "medium": "Altered denim",
-    "imagePath": "/assets/03_denim_jacket.jpg",
-    "image": "/assets/03_denim_jacket.jpg",
-    "images": ["/assets/03_denim_jacket.jpg", "/assets/04_denim_detail.jpg"]
+    "colors": ["#7a6a5a", "#b0a090"],
+    "dimensions": "To be confirmed",
+    "medium": "Oil on canvas",
+    "imagePath": "/assets/IMG_0096.jpeg",
+    "image": "/assets/IMG_0096.jpeg",
+    "images": ["/assets/IMG_0096.jpeg"]
   },
   {
     "id": "04",
-    "title": "Navy Jacket",
+    "title": "Painting IV",
     "price": "Enquire",
-    "colors": ["#1a2a4a", "#2a3a60"],
-    "dimensions": "One size",
-    "medium": "Altered cotton twill",
-    "imagePath": "/assets/05_navy_jacket.jpg",
-    "image": "/assets/05_navy_jacket.jpg",
-    "images": ["/assets/05_navy_jacket.jpg", "/assets/06_khaki_shorts.jpg"]
+    "colors": ["#5a4a6a", "#908090"],
+    "dimensions": "To be confirmed",
+    "medium": "Oil on canvas",
+    "imagePath": "/assets/IMG_4352.jpeg",
+    "image": "/assets/IMG_4352.jpeg",
+    "images": ["/assets/IMG_4352.jpeg"]
   },
   {
     "id": "05",
-    "title": "Khaki Shorts",
+    "title": "Painting V",
     "price": "Enquire",
-    "colors": ["#b0a882", "#d4c89a"],
-    "dimensions": "One size",
-    "medium": "Altered cotton",
-    "imagePath": "/assets/07_khaki_texture.jpg",
-    "image": "/assets/07_khaki_texture.jpg",
-    "images": ["/assets/07_khaki_texture.jpg", "/assets/08_blush_top_hero.jpg"]
-  },
-  {
-    "id": "06",
-    "title": "Blush Top",
-    "price": "Enquire",
-    "colors": ["#e8a898", "#e8c8bc"],
-    "dimensions": "One size",
-    "medium": "Altered cotton",
-    "imagePath": "/assets/09_batik_top_hero.jpg",
-    "image": "/assets/09_batik_top_hero.jpg",
-    "images": ["/assets/09_batik_top_hero.jpg"]
-  },
-  {
-    "id": "07",
-    "title": "Batik Top",
-    "price": "Enquire",
-    "colors": ["#2a6a5a", "#c47a3a"],
-    "dimensions": "One size",
-    "medium": "Hand-altered batik cotton",
-    "imagePath": "/assets/10_batik_garden_hero.jpg",
-    "image": "/assets/10_batik_garden_hero.jpg",
-    "images": ["/assets/10_batik_garden_hero.jpg"]
-  },
-  {
-    "id": "08",
-    "title": "Batik Pants",
-    "price": "Enquire",
-    "colors": ["#4a6a8a", "#8a5a3a"],
-    "dimensions": "One size",
-    "medium": "Hand-altered batik cotton",
-    "imagePath": "/assets/11_batik_pants.jpg",
-    "image": "/assets/11_batik_pants.jpg",
-    "images": ["/assets/11_batik_pants.jpg", "/assets/12_batik_set.jpg"]
+    "colors": ["#4a6a5a", "#80a090"],
+    "dimensions": "To be confirmed",
+    "medium": "Oil on canvas",
+    "imagePath": "/assets/IMG_9350.jpeg",
+    "image": "/assets/IMG_9350.jpeg",
+    "images": ["/assets/IMG_9350.jpeg"]
   }
 ]
