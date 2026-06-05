@@ -23,11 +23,11 @@ const imgSrc = (path: string) =>
   process.env.NODE_ENV === 'production' ? `/Penny_website${path}` : path;
 
 const ZINNIA_LAYERS = [
-  '#9E3060',  // deep outer rose
-  '#7D1545',  // magenta core
-  '#8BAD30',  // chartreuse lime
-  '#D4885C',  // warm apricot
-  '#C4607A',  // salmon rose
+  'rgba(158, 48,  96,  0.45)',   // #9E3060 deep outer rose
+  'rgba(125, 21,  69,  0.45)',   // #7D1545 magenta core
+  'rgba(139, 173, 48,  0.45)',   // #8BAD30 chartreuse lime
+  'rgba(212, 136, 92,  0.45)',   // #D4885C warm apricot
+  'rgba(196, 96,  122, 0.45)',   // #C4607A salmon rose
 ];
 
 function ArtworkCard({
@@ -77,7 +77,7 @@ function ArtworkCard({
           <motion.div
             key={i}
             className="absolute inset-0 z-10"
-            style={{ backgroundColor: colour, opacity: 0.82, transformOrigin: 'top' }}
+            style={{ backgroundColor: colour, transformOrigin: 'top' }}
             initial={{ scaleY: 1 }}
             animate={revealed ? { scaleY: 0 } : { scaleY: 1 }}
             transition={{
