@@ -16,8 +16,8 @@ const ArchivalCanvasMaterial = shaderMaterial(
     uMobile: 0,
     uResolution: new THREE.Vector2(),
     // Atmosphere — wine-red palette, lightened base (Fix 1)
-    uColorBase:    new THREE.Color('#6B1428'),  // void wine-red (was #3D0916)
-    uColorPaper:   new THREE.Color('#7d1a34'),  // paper tooth highlight
+    uColorBase:    new THREE.Color('#8B2035'),  // void mid-red (was #6B1428)
+    uColorPaper:   new THREE.Color('#9e2642'),  // paper tooth highlight
     uColorPG7:     new THREE.Color('#2a0510'),  // near-black wine for band base
     uColorMagenta: new THREE.Color('#7A1835'),  // zinnia-deep for band/glow mix
     uColorGlow:    new THREE.Color('#D4487A'),  // zinnia-mid velocity glow
@@ -98,17 +98,17 @@ const ArchivalCanvasMaterial = shaderMaterial(
       vec2 pUv1    = uv * vec2(uResolution.x / uResolution.y, 1.0) * 3.5;
       vec2 offset1 = vec2(uTime * 0.008, uTime * 0.015 + scrollOffset * 0.15);
       float d1     = pow(random(pUv1 - offset1), 110.0);
-      finalColor  += uColorViolet1 * d1 * 0.040 * motionFactor;
+      finalColor  += uColorViolet1 * d1 * 0.020 * motionFactor;
 
       vec2 pUv2    = uv * vec2(uResolution.x / uResolution.y, 1.0) * 2.2;
       vec2 offset2 = vec2(uTime * 0.018, uTime * 0.035 + scrollOffset * 0.5);
       float d2     = pow(random(pUv2 - offset2), 85.0);
-      finalColor  += uColorViolet2 * d2 * 0.050 * motionFactor;
+      finalColor  += uColorViolet2 * d2 * 0.025 * motionFactor;
 
       vec2 pUv3    = uv * vec2(uResolution.x / uResolution.y, 1.0) * 1.2;
       vec2 offset3 = vec2(uTime * 0.025, uTime * 0.05 + scrollOffset * 1.0);
       float d3     = pow(random(pUv3 - offset3), 55.0);
-      finalColor  += uColorViolet3 * d3 * 0.035 * motionFactor;
+      finalColor  += uColorViolet3 * d3 * 0.018 * motionFactor;
 
       // 5. SCREEN GRAIN
       float screenGrain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);

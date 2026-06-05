@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --color-void: #6B1428;
-  --color-diox-rich: #6B1428;
+  --color-void: #8B2035;
+  --color-diox-rich: #8B2035;
   --color-parchment: #FDF5E6;        /* UNCHANGED */
   --color-vermillion: #D4487A;
   --color-magenta: #F07898;
@@ -33,7 +33,7 @@ html {
 
 /* Page transition overlay */
 .page-transition-overlay {
-  background-color: rgba(107, 20, 40, 1);   /* #6B1428 — void wine-red */
+  background-color: rgba(139, 32, 53, 1);   /* #8B2035 — void wine-red */
   z-index: 9999;
 }
 @media (min-width: 769px) {
