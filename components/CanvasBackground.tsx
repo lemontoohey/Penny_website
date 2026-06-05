@@ -7,8 +7,8 @@ import * as THREE from 'three';
 import { extend } from '@react-three/fiber';
 import { useUiStore } from '@/store/useUiStore';
 
-// Zinnia flower aesthetic — pigment-layered wine-red field with concentric petal rings
-// Particle layers repurposed from violet → lighter warm reds
+// Original atmospheric void shader — colour temperature shifted from violet to wine-red.
+// Aesthetic is unchanged: dark void, paper tooth, velocity band, parallax particles.
 const ArchivalCanvasMaterial = shaderMaterial(
   {
     uTime: 0,
@@ -16,8 +16,14 @@ const ArchivalCanvasMaterial = shaderMaterial(
     uVelocity: 0,
     uMobile: 0,
     uResolution: new THREE.Vector2(),
+    // Atmosphere colours — wine-red palette (was violet)
+    uColorBase:    new THREE.Color('#3D0916'),  // void wine-red base
+    uColorPaper:   new THREE.Color('#4a0f1e'),  // fractionally lighter for paper tooth
+    uColorPG7:     new THREE.Color('#1a0208'),  // near-black wine for band base
+    uColorMagenta: new THREE.Color('#7A1835'),  // zinnia-deep for band mix
+    uColorGlow:    new THREE.Color('#D4487A'),  // zinnia-mid for velocity glow
     uReduceMotion: 0,
-    // Warm red particle colours (replaces violet palette)
+    // Particle colours — warm reds (was violet)
     uColorViolet1: new THREE.Color('#DC4664'),  // warm mid-red
     uColorViolet2: new THREE.Color('#C82D4B'),  // deeper rose-red
     uColorViolet3: new THREE.Color('#F56E82'),  // bright warm pink
@@ -30,144 +36,84 @@ const ArchivalCanvasMaterial = shaderMaterial(
     }
   `,
   `
-    precision highp float;
+    precision mediump float;
     uniform float uTime;
     uniform float uScroll;
     uniform float uVelocity;
     uniform float uMobile;
     uniform vec2 uResolution;
+    uniform vec3 uColorBase;
+    uniform vec3 uColorPaper;
+    uniform vec3 uColorPG7;
+    uniform vec3 uColorMagenta;
+    uniform vec3 uColorGlow;
     uniform float uReduceMotion;
     uniform vec3 uColorViolet1;
     uniform vec3 uColorViolet2;
     uniform vec3 uColorViolet3;
     varying vec2 vUv;
 
-    // --- Colour palette (pigment layers) ---
-    // PV29 violet base
-    vec3 PV29  = vec3(0.165, 0.047, 0.176);
-    // PBk31 perylene black
-    vec3 PBk31 = vec3(0.047, 0.031, 0.039);
-    // PR177 anthraquinone red
-    vec3 PR177 = vec3(0.769, 0.071, 0.176);
-
-    // Zinnia petal colours
-    vec3 zinnia_deep  = vec3(0.478, 0.094, 0.208);  // #7A1835
-    vec3 zinnia_mid   = vec3(0.831, 0.282, 0.478);  // #D4487A
-    vec3 zinnia_bloom = vec3(0.941, 0.471, 0.596);  // #F07898
-
-    // --- Noise helpers ---
-    float hash(vec2 p) {
-      p = fract(p * vec2(234.34, 435.345));
-      p += dot(p, p + 34.23);
-      return fract(p.x * p.y);
+    float drawBand(float uvX, float xPos, float width, float blur) {
+      float dist = abs(uvX - xPos);
+      return smoothstep(width + blur, width, dist);
     }
 
-    float noise(vec2 p) {
-      vec2 i = floor(p);
-      vec2 f = fract(p);
-      f = f * f * (3.0 - 2.0 * f);
-      float a = hash(i);
-      float b = hash(i + vec2(1.0, 0.0));
-      float c = hash(i + vec2(0.0, 1.0));
-      float d = hash(i + vec2(1.0, 1.0));
-      return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
-    }
-
-    float fbm(vec2 p) {
-      float v = 0.0;
-      float a = 0.5;
-      for (int i = 0; i < 5; i++) {
-        v += a * noise(p);
-        p  = p * 2.1 + vec2(1.7, 9.2);
-        a *= 0.5;
-      }
-      return v;
-    }
-
-    // --- Zinnia petal ring function ---
-    float zinniaPetal(vec2 uv, float radius, float petal_count, float time_offset) {
-      float angle      = atan(uv.y, uv.x);
-      float dist       = length(uv);
-      float petal_shape = cos(angle * petal_count + uTime * 0.08 + time_offset) * 0.12 + 0.88;
-      float ring = smoothstep(radius * petal_shape + 0.04, radius * petal_shape, dist)
-                 - smoothstep(radius * petal_shape - 0.08, radius * petal_shape - 0.12, dist);
-      return ring * 0.7;
-    }
-
-    // Shared random for particle layers
     float random(vec2 st) {
       return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
     }
 
     void main() {
-      // Centred, aspect-ratio-correct UV for the zinnia rings
-      vec2 uv = (gl_FragCoord.xy - uResolution * 0.5) / min(uResolution.x, uResolution.y);
+      vec2 uv = vUv;
 
-      // --- Pigment base layer (PV29 + PBk31 20% + PR177 73%) ---
-      vec3 colour = PV29;
-      colour = mix(colour, PBk31, 0.20);
-      colour = mix(colour, PR177, 0.73);
-      // Result: deep wine-red ~#3D0916
-
-      // --- Organic noise field ---
-      float t  = uTime * 0.04;
-      vec2 q   = uv + vec2(fbm(uv + t), fbm(uv + vec2(1.7, 9.2) + t));
-      float f  = fbm(q * 2.0 + t * 0.5);
-
-      // --- Zinnia petal rings (concentric, slow-breathing) ---
-      float ring1 = zinniaPetal(uv, 0.18, 8.0, 0.0);
-      float ring2 = zinniaPetal(uv, 0.34, 8.0, 0.4);
-      float ring3 = zinniaPetal(uv, 0.52, 8.0, 0.8);
-      float ring4 = zinniaPetal(uv, 0.72, 8.0, 1.2);
-      float ring5 = zinniaPetal(uv, 0.94, 8.0, 1.6);
-
-      // --- Layer colours outward from centre ---
-      colour = mix(colour, zinnia_deep,  ring1 * (0.5 + 0.3 * f));
-      colour = mix(colour, zinnia_mid,   ring2 * (0.4 + 0.2 * f));
-      colour = mix(colour, zinnia_bloom, ring3 * (0.30 + 0.15 * f));
-      colour = mix(colour, zinnia_mid,   ring4 * 0.20);
-      colour = mix(colour, zinnia_deep,  ring5 * 0.15);
-
-      // --- Warm noise glow at centre ---
-      float centre_glow = smoothstep(0.35, 0.0, length(uv));
-      colour = mix(colour, zinnia_deep, centre_glow * 0.35 * (0.5 + 0.5 * sin(uTime * 0.3)));
-
-      // --- Atmospheric noise overlay ---
-      colour += (f - 0.5) * 0.04 * zinnia_bloom;
-
-      // --- Vignette (keep structure) ---
-      float dist_centre = length(uv * vec2(0.9, 1.1));
-      float vignette    = 1.0 - smoothstep(0.3, 1.4, dist_centre);
-      colour *= (0.55 + 0.45 * vignette);
-
-      // --- Three-tier parallax particle sparkles (warm reds) ---
-      float motionFactor = 1.0 - uReduceMotion;
       float scrollOffset = uScroll * 0.0015;
 
-      // 0-1 UV for particles (aspect-corrected)
-      vec2 normUv = vUv;
-      vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
+      // 1. ULTRA-SUBTLE PAPER TOOTH
+      vec2 toothUV = uv * (uResolution.x / uResolution.y) * 600.0;
+      float grainBase = random(toothUV);
+      float toothPattern = smoothstep(0.45, 0.55, grainBase);
+      vec3 finalColor = mix(uColorBase, uColorPaper, toothPattern * 0.15);
 
-      vec2 pUv1   = normUv * aspect * 3.5;
-      vec2 off1   = vec2(uTime * 0.008, uTime * 0.015 + scrollOffset * 0.15);
-      float d1    = pow(random(pUv1 - off1), 110.0);
-      colour     += uColorViolet1 * d1 * 0.012 * motionFactor;
+      // 2. CHROMATIC BAND + VELOCITY HALATION
+      float posB = fract(0.5 + scrollOffset * 0.4);
+      float halationOffset = uVelocity * 0.002;
+      float bandR = drawBand(uv.x + halationOffset, posB, 0.015, 0.15);
+      float bandG = drawBand(uv.x,                  posB, 0.015, 0.15);
+      float bandB = drawBand(uv.x - halationOffset, posB, 0.015, 0.15);
 
-      vec2 pUv2   = normUv * aspect * 2.2;
-      vec2 off2   = vec2(uTime * 0.018, uTime * 0.035 + scrollOffset * 0.5);
-      float d2    = pow(random(pUv2 - off2), 85.0);
-      colour     += uColorViolet2 * d2 * 0.015 * motionFactor;
+      vec3 chromaticGrey = mix(uColorPG7, uColorMagenta, 0.5);
 
-      vec2 pUv3   = normUv * aspect * 1.2;
-      vec2 off3   = vec2(uTime * 0.025, uTime * 0.05 + scrollOffset * 1.0);
-      float d3    = pow(random(pUv3 - off3), 55.0);
-      colour     += uColorViolet3 * d3 * 0.01 * motionFactor;
+      float barCenterMask = smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.7, uv.y);
+      float scrollLight   = smoothstep(0.1, 6.0, abs(uVelocity)) * barCenterMask;
 
-      // --- Subtle film grain ---
-      float grain = (hash(gl_FragCoord.xy + uTime * 0.1) - 0.5) * 0.018;
-      colour     += grain;
+      vec3 bandColor   = mix(chromaticGrey, uColorGlow, scrollLight * 0.6);
+      float bandOpacity = 0.04 + (scrollLight * 0.12);
+      float topBottomMask = mix(1.0, barCenterMask, uMobile);
+      finalColor += vec3(bandColor.r * bandR, bandColor.g * bandG, bandColor.b * bandB) * bandOpacity * topBottomMask;
 
-      gl_FragColor = vec4(clamp(colour, 0.0, 1.0), 1.0);
+      // 3. THREE-TIER PARALLAX PARTICLES
+      float motionFactor = 1.0 - uReduceMotion;
+
+      vec2 pUv1   = uv * vec2(uResolution.x / uResolution.y, 1.0) * 3.5;
+      vec2 offset1 = vec2(uTime * 0.008, uTime * 0.015 + scrollOffset * 0.15);
+      float d1    = pow(random(pUv1 - offset1), 110.0);
+      finalColor += uColorViolet1 * d1 * 0.012 * motionFactor;
+
+      vec2 pUv2   = uv * vec2(uResolution.x / uResolution.y, 1.0) * 2.2;
+      vec2 offset2 = vec2(uTime * 0.018, uTime * 0.035 + scrollOffset * 0.5);
+      float d2    = pow(random(pUv2 - offset2), 85.0);
+      finalColor += uColorViolet2 * d2 * 0.015 * motionFactor;
+
+      vec2 pUv3   = uv * vec2(uResolution.x / uResolution.y, 1.0) * 1.2;
+      vec2 offset3 = vec2(uTime * 0.025, uTime * 0.05 + scrollOffset * 1.0);
+      float d3    = pow(random(pUv3 - offset3), 55.0);
+      finalColor += uColorViolet3 * d3 * 0.01 * motionFactor;
+
+      // 4. SCREEN GRAIN
+      float screenGrain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+      finalColor += screenGrain * 0.008;
+
+      finalColor = min(finalColor, vec3(1.0));
+      gl_FragColor = vec4(finalColor, 1.0);
     }
   `
 );
