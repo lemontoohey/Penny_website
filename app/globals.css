@@ -12,7 +12,9 @@
   --color-zinnia-deep: #7A1835;
   --color-zinnia-mid: #D4487A;
   --color-zinnia-bloom: #F07898;
-  --color-zinnia-tip: #FFADC6;
+  --color-zinnia-tip:     #FFADC6;
+  --color-zinnia-lime:    #829942;
+  --color-zinnia-apricot: #C28E70;
   --font-sans: var(--font-inter), sans-serif;
   --font-serif: var(--font-playfair), serif;
 }

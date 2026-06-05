@@ -17,7 +17,9 @@ const config: Config = {
         'zinnia-deep':  '#7A1835',
         'zinnia-mid':   '#D4487A',
         'zinnia-bloom': '#F07898',
-        'zinnia-tip':   '#FFADC6',
+        'zinnia-tip':     '#FFADC6',
+        'zinnia-lime':    '#829942',
+        'zinnia-apricot': '#C28E70',
         // Legacy tokens → zinnia equivalents
         magenta:    '#F07898',   // was #E40078 — now zinnia-bloom
         vermillion: '#D4487A',   // was rgba(155,27,21,0.85) — now zinnia-mid

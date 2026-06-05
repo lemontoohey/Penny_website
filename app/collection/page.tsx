@@ -25,8 +25,8 @@ const imgSrc = (path: string) =>
 const ZINNIA_LAYERS = [
   'rgba(158, 48,  96,  0.45)',   // #9E3060 deep outer rose
   'rgba(125, 21,  69,  0.45)',   // #7D1545 magenta core
-  'rgba(139, 173, 48,  0.45)',   // #8BAD30 chartreuse lime
-  'rgba(212, 136, 92,  0.45)',   // #D4885C warm apricot
+  'rgba(130, 153, 66,  0.45)',   // #829942 muted sage-olive
+  'rgba(194, 142, 112, 0.45)',   // #C28E70 muted warm terracotta
   'rgba(196, 96,  122, 0.45)',   // #C4607A salmon rose
 ];
 
